@@ -12,7 +12,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('Produk.index', [
+        return view('produk.index', [
             'title' => 'Data Produk',
             'produks' => Produk::all(),
             ]);
