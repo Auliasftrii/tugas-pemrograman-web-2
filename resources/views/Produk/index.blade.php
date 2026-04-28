@@ -1,4 +1,4 @@
-<x-App>
+<x-app>
 
     <x-slot:title>{{ $title }}</x-slot>
 
@@ -18,10 +18,17 @@
                 {{ $produk->kategori }} -- {{ $produk->stok }} -- {{ $produk->harga }}
 
                 <a class="btn btn-warning btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">edit</a>
+                <form action="{{ route('produk.destroy', $produk) }}" method="POST" class="d-inline">
+                    @method('DELETE')
+                    @csrf
+
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Anda yakin?')">Delete</button>
+                </form>
 
 
             </li>
         @endforeach
     </ul>
 
-</x-App>
+</x-app>
