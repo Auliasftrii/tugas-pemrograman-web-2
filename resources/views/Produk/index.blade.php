@@ -15,7 +15,12 @@
             <li class="list-group-item">
                 {{ $loop->iteration }}.{{ $produk->kode_produk }} -- {{ $produk->nama_produk }}
                 --
-                {{ $produk->kategori }} -- {{ $produk->stok }} -- {{ $produk->harga }}</li>
+                {{ $produk->kategori }} -- {{ $produk->stok }} -- {{ $produk->harga }}
+
+                <a class="btn btn-warning btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">edit</a>
+
+
+            </li>
         @endforeach
     </ul>
 

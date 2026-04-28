@@ -67,7 +67,10 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        return view('produk.edit', [
+            'title' => 'Edit Produk',
+            'produk' => $produk
+        ]);
     }
 
     /**
@@ -75,7 +78,25 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $validated = $request->validate([
+        'nama_produk' => 'required|max:255',
+        'kode_produk' => 'required|max:255',
+        'kategori' => 'required|max:255',
+        'stok' => 'required|integer|min:0',
+        'harga' => 'required|integer|min:0',
+    ], [
+        'nama_produk.required' => 'Nama produk wajib diisi',
+        'kode_produk.required' => 'Kode produk wajib diisi',
+        'kategori.required' => 'Kategori wajib diisi',
+        'stok.required' => 'Stok wajib diisi',
+        'stok.integer' => 'Stok harus angka',
+        'harga.required' => 'Harga wajib diisi',
+        'harga.integer' => 'Harga harus angka',
+    ]);
+
+    $produk->update($validated);
+
+    return to_route('produk.index')->withSuccess('Data berhasil diubah');
     }
 
     /**
