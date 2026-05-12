@@ -13,19 +13,22 @@
     <ul class="list-group">
         @foreach ($produks as $produk)
             <li class="list-group-item">
-                {{ $loop->iteration }}.{{ $produk->kode_produk }} -- {{ $produk->nama_produk }}
-                --
-                {{ $produk->kategori }} -- {{ $produk->stok }} -- {{ $produk->harga }}
+                {{ $loop->iteration }}.
+                {{ $produk->kode_produk }} --
+                {{ $produk->nama_produk }} --
+                {{ $produk->kategori->nama_kategori }} --
+                {{ $produk->brand->nama_brand }} --
+                {{ $produk->stok }} --
+                {{ $produk->harga }}
 
-                <a class="btn btn-warning btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">edit</a>
+                <a class="btn btn-warning btn-sm" href="{{ route('produk.edit', $produk) }}" role="button">Edit</a>
+
                 <form action="{{ route('produk.destroy', $produk) }}" method="POST" class="d-inline">
                     @method('DELETE')
                     @csrf
-
                     <button type="submit" class="btn btn-danger btn-sm"
                         onclick="return confirm('Anda yakin?')">Delete</button>
                 </form>
-
 
             </li>
         @endforeach

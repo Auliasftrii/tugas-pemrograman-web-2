@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
+use App\Models\Kategori;
 use App\Models\Produk;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,11 +20,12 @@ class ProdukFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_produk' => fake()->name(),
-            'kode_produk' => fake()->numerify('PRD###'),
-            'kategori' => fake()->name(),
-            'stok' => fake()->numberBetween(1, 100),
-            'harga' => fake()->numberBetween(10000, 100000),
+            'nama_produk' => fake()->word(),
+            'kode_produk' => fake()->unique()->bothify('PRD###'),
+            'kategori_id' => Kategori::all()->random()->id,
+            'brand_id' => Brand::all()->random()->id,
+            'stok' => fake()->numberBetween(10,100),
+            'harga' => fake()->numberBetween(10000,150000),
         ];
     }
 }

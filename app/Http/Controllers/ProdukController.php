@@ -3,108 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('produk.index', [
             'title' => 'Data Produk',
             'produks' => Produk::latest()->get(),
-            //'produks' => Produk::orderBy('nama_produk', 'asc')->get(),
-            ]);
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('produk.create', [
-            'title' => 'Tambah Produk'
-            ]);
+            'title' => 'Tambah Produk',
+            'kategoris' => Kategori::all(),
+            'brands' => \App\Models\Brand::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'nama_produk' => 'required|max:255',
-        'kode_produk' => 'required|max:255',
-        'kategori' => 'required|max:255',
-        'stok' => 'required|integer|min:0',
-        'harga' => 'required|integer|min:0',
-    ], [
-        'nama_produk.required' => 'Nama produk wajib diisi',
-        'kode_produk.required' => 'Kode produk wajib diisi',
-        'kategori.required' => 'Kategori wajib diisi',
-        'stok.required' => 'Stok wajib diisi',
-        'stok.integer' => 'Stok harus angka',
-        'harga.required' => 'Harga wajib diisi',
-        'harga.integer' => 'Harga harus angka',
-    ]);
+            'nama_produk' => 'required|max:255',
+            'kode_produk' => 'required|max:255',
+            'kategori_id' => 'required',
+            'brand_id' => 'required',
+            'stok' => 'required|integer|min:0',
+            'harga' => 'required|integer|min:0',
+        ], [
+            'nama_produk.required' => 'Nama produk wajib diisi',
+            'kode_produk.required' => 'Kode produk wajib diisi',
+            'kategori_id.required' => 'Kategori wajib dipilih',
+            'brand_id.required' => 'Brand wajib dipilih',
+            'stok.required' => 'Stok wajib diisi',
+            'harga.required' => 'Harga wajib diisi',
+        ]);
 
         Produk::create($validated);
+
         return to_route('produk.index')->withSuccess('Data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Produk $produk)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Produk $produk)
     {
         return view('produk.edit', [
             'title' => 'Edit Produk',
-            'produk' => $produk
+            'produk' => $produk,
+            'kategoris' => Kategori::all()
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Produk $produk)
     {
         $validated = $request->validate([
-        'nama_produk' => 'required|max:255',
-        'kode_produk' => 'required|max:255',
-        'kategori' => 'required|max:255',
-        'stok' => 'required|integer|min:0',
-        'harga' => 'required|integer|min:0',
-    ], [
-        'nama_produk.required' => 'Nama produk wajib diisi',
-        'kode_produk.required' => 'Kode produk wajib diisi',
-        'kategori.required' => 'Kategori wajib diisi',
-        'stok.required' => 'Stok wajib diisi',
-        'stok.integer' => 'Stok harus angka',
-        'harga.required' => 'Harga wajib diisi',
-        'harga.integer' => 'Harga harus angka',
-    ]);
+            'nama_produk' => 'required|max:255',
+            'kode_produk' => 'required|max:255',
+            'kategori_id' => 'required',
+            'stok' => 'required|integer|min:0',
+            'harga' => 'required|integer|min:0',
+        ], [
+            'nama_produk.required' => 'Nama produk wajib diisi',
+            'kode_produk.required' => 'Kode produk wajib diisi',
+            'kategori_id.required' => 'Kategori wajib dipilih',
+            'stok.required' => 'Stok wajib diisi',
+            'stok.integer' => 'Stok harus angka',
+            'harga.required' => 'Harga wajib diisi',
+            'harga.integer' => 'Harga harus angka',
+        ]);
 
-    $produk->update($validated);
+        $produk->update($validated);
 
-    return to_route('produk.index')->withSuccess('Data berhasil diubah');
+        return to_route('produk.index')->withSuccess('Data berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Produk $produk)
     {
-    $produk->delete($produk);
-    return redirect()->route('produk.index')->with('success', 'Data berhasil dihapus');
+        $produk->delete();
+
+        return redirect()->route('produk.index')->with('success', 'Data berhasil dihapus');
     }
 }
