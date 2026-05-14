@@ -4,17 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
-#[Fillable(['nama_brand','kode_brand'])]
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Brand extends Model
 {
     use HasFactory;
 
-    public function produks(): HasMany
+    protected $fillable = [
+        'kategori_id',
+        'nama_brand',
+        'kode_brand',
+        'jenis_brand',
+        'stok_brand'
+    ];
+
+    public function kategori(): BelongsTo
     {
-        return $this->hasMany(Produk::class);
+        return $this->belongsTo(Kategori::class);
     }
 }

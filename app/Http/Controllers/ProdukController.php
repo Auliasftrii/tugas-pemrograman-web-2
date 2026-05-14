@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Produk;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ProdukController extends Controller
         return view('produk.create', [
             'title' => 'Tambah Produk',
             'kategoris' => Kategori::all(),
-            'brands' => \App\Models\Brand::all()
+            'brands' => Brand::all()
         ]);
     }
 

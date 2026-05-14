@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -9,10 +11,26 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $brands = Brand::with('kategori')->latest();
+
+        if ($request->keyword) {
+            $brands->where('nama_brand', 'like', '%' . $request->keyword . '%')
+                ->orWhere('kode_brand', 'like', '%' . $request->keyword . '%');
+        }
+
+        if ($request->kategori) {
+            $brands->where('kategori_id', $request->kategori);
+        }
+
+        return view('brand.index', [
+            'title' => 'Brand',
+            'brands' => $brands->paginate(2)->withQueryString(),
+            'kategoris' => Kategori::groupBy('nama_kategori')->get()
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

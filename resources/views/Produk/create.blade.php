@@ -42,18 +42,15 @@
 
         <div class="mb-3">
             <label for="brand_id" class="form-label">Brand</label>
-            <select name="brand_id" class="form-control">
+            <select name="brand_id" id="brand_id" class="form-control">
                 <option value="">Pilih Brand</option>
+
                 @foreach ($brands as $brand)
                     <option value="{{ $brand->id }}">
                         {{ $brand->nama_brand }}
                     </option>
                 @endforeach
             </select>
-
-            @error('brand_id')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
         </div>
 
         <div class="mb-3">

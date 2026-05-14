@@ -10,8 +10,11 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id')->constrained()->cascadeOnDelete();
             $table->string('nama_brand');
             $table->string('kode_brand')->unique();
+            $table->string('jenis_brand');
+            $table->integer('stok_brand');
             $table->timestamps();
         });
     }
