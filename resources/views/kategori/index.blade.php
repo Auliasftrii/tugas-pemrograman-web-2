@@ -1,7 +1,9 @@
 <x-app>
 
     <x-slot:title>{{ $title }}</x-slot>
+
     <a class="btn btn-primary mb-3" href="{{ route('kategori.create') }}" role="button">Create</a>
+
     <form action="" class="mb-3">
         <input type="text" name="keyword" class="form-control" placeholder="Cari kategori"
             value="{{ request('keyword') }}">
@@ -14,6 +16,10 @@
                 {{ $kategori->nama_kategori }} --
                 {{ $kategori->kode_kategori }} --
                 {{ $kategori->deskripsi }}
+
+                <a href="{{ route('kategori.edit', $kategori) }}" class="btn btn-warning btn-sm">
+                    Edit
+                </a>
             </li>
         @endforeach
     </ul>

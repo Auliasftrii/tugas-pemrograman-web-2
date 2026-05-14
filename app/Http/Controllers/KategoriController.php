@@ -7,9 +7,6 @@ use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $kategoris = Kategori::latest();
@@ -27,19 +24,13 @@ class KategoriController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('kategori.create', [
             'title' => 'Tambah Kategori'
-    ]);
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -58,35 +49,40 @@ class KategoriController extends Controller
         return to_route('kategori.index')->withSuccess('Data berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Kategori $kategori)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Kategori $kategori)
     {
-        //
+        return view('kategori.edit', [
+            'title' => 'Edit Kategori',
+            'kategori' => $kategori
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kategori $kategori)
     {
-        //
+        $validated = $request->validate([
+            'nama_kategori' => 'required|max:255',
+            'kode_kategori' => 'required|max:255',
+            'deskripsi' => 'required|max:255',
+        ], [
+            'nama_kategori.required' => 'Nama kategori wajib diisi',
+            'kode_kategori.required' => 'Kode kategori wajib diisi',
+            'deskripsi.required' => 'Deskripsi wajib diisi',
+        ]);
+
+        $kategori->update($validated);
+
+        return to_route('kategori.index')->withSuccess('Kategori berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+
+        return to_route('kategori.index')->withSuccess('Kategori berhasil dihapus');
     }
 }
