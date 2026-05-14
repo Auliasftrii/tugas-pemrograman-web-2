@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kategori;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $kategoris = Kategori::latest();
+
+        $keyword = request('keyword');
+
+        if ($keyword) {
+            $kategoris->where('nama_kategori', 'like', '%' . $keyword . '%')
+                    ->orWhere('kode_kategori', 'like', '%' . $keyword . '%');
+        }
+
+        return view('kategori.index', [
+            'title' => 'Kategori',
+            'kategoris' => $kategoris->paginate(2)->withQueryString(),
+        ]);
     }
 
     /**
