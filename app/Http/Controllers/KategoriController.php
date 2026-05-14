@@ -51,7 +51,10 @@ class KategoriController extends Controller
 
     public function show(Kategori $kategori)
     {
-        //
+        return view('kategori.show', [
+            'title' => 'Detail Kategori',
+            'kategori' => $kategori
+        ]);
     }
 
     public function edit(Kategori $kategori)

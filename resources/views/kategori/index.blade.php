@@ -23,6 +23,10 @@
                 {{ $kategori->kode_kategori }} --
                 {{ $kategori->deskripsi }}
 
+                <a href="{{ route('kategori.show', $kategori) }}" class="btn btn-info btn-sm">
+                    Detail
+                </a>
+
                 <a href="{{ route('kategori.edit', $kategori) }}" class="btn btn-warning btn-sm">
                     Edit
                 </a>
