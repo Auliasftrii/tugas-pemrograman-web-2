@@ -82,7 +82,6 @@ class KategoriController extends Controller
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-
         return to_route('kategori.index')->withSuccess('Kategori berhasil dihapus');
     }
 }

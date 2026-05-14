@@ -2,6 +2,12 @@
 
     <x-slot:title>{{ $title }}</x-slot>
 
+    @session('success')
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endsession
+
     <a class="btn btn-primary mb-3" href="{{ route('kategori.create') }}" role="button">Create</a>
 
     <form action="" class="mb-3">
@@ -20,6 +26,15 @@
                 <a href="{{ route('kategori.edit', $kategori) }}" class="btn btn-warning btn-sm">
                     Edit
                 </a>
+
+                <form action="{{ route('kategori.destroy', $kategori) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin?')">
+                        Delete
+                    </button>
+                </form>
             </li>
         @endforeach
     </ul>

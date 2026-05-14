@@ -13,4 +13,5 @@ Route::get('/produk/{produk}/edit', [ProdukController::class, 'edit'])->name('pr
 Route::put('/produk/{produk}', [ProdukController::class, 'update'])->name('produk.update');
 Route::delete('/produk/{produk}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
+
 Route::resource('kategori', KategoriController::class);
