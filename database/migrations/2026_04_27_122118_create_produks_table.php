@@ -10,8 +10,6 @@ return new class extends Migration
     {
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->string('nama_produk');
             $table->string('kode_produk');
             $table->integer('stok');

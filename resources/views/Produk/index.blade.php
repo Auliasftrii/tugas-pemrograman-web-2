@@ -16,8 +16,6 @@
                 {{ $loop->iteration }}.
                 {{ $produk->kode_produk }} --
                 {{ $produk->nama_produk }} --
-                {{ $produk->kategori->nama_kategori }} --
-                {{ $produk->brand->nama_brand }} --
                 {{ $produk->stok }} --
                 {{ $produk->harga }}
 
@@ -29,7 +27,6 @@
                     <button type="submit" class="btn btn-danger btn-sm"
                         onclick="return confirm('Anda yakin?')">Delete</button>
                 </form>
-
             </li>
         @endforeach
     </ul>

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Brand extends Model
 {
@@ -18,7 +17,7 @@ class Brand extends Model
         'stok_brand'
     ];
 
-    public function kategori(): BelongsTo
+    public function kategori()
     {
         return $this->belongsTo(Kategori::class);
     }

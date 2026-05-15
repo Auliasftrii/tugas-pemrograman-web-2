@@ -26,8 +26,8 @@ class BrandController extends Controller
 
         return view('brand.index', [
             'title' => 'Brand',
-            'brands' => $brands->paginate(2)->withQueryString(),
-            'kategoris' => Kategori::groupBy('nama_kategori')->get()
+            'brands' => $brands->paginate(5)->withQueryString(),
+            'kategoris' => Kategori::select('id','nama_kategori')->distinct()->get()
         ]);
     }
 
@@ -37,7 +37,10 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('brand.create', [
+            'title' => 'Brand Create',
+            'kategoris' => Kategori::latest()->get()
+    ]);
     }
 
     /**
@@ -45,7 +48,25 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'kategori_id' => 'required',
+            'nama_brand' => 'required|min:3|max:255',
+            'kode_brand' => 'required|unique:brands,kode_brand',
+            'jenis_brand' => 'required|string|max:255',
+            'stok_brand' => 'required|numeric',
+        ], [
+            'kategori_id.required' => 'Pilih kategori terlebih dahulu',
+            'nama_brand.required' => 'Nama brand tidak boleh kosong',
+            'nama_brand.min' => 'Nama brand minimal 3 karakter',
+            'kode_brand.required' => 'Kode brand wajib diisi',
+            'kode_brand.unique' => 'Kode brand sudah ada',
+            'jenis_brand.required' => 'Jenis brand wajib diisi',
+            'stok_brand.required' => 'Stok brand wajib diisi',
+        ]);
+
+        Brand::create($validated);
+
+        return redirect()->route('brand.index')->withSuccess('Data brand berhasil disimpan');
     }
 
     /**

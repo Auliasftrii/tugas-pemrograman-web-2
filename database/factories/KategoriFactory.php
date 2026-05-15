@@ -9,13 +9,11 @@ class KategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'name_kategori' => fake()->randomElement([
-                'Lip Tint',
-                'Foundation',
-                'Powder',
-                'Mascara',
-                'Skincare'
+            'nama_kategori' => fake()->randomElement([
+                'Kosmetik', 'Skincare', 'Makanan', 'Minuman', 'Elektronik'
             ]),
+            'kode_kategori' => 'KTG' . fake()->unique()->numberBetween(100, 999),
+            'deskripsi' => fake()->sentence(),
         ];
     }
 }
