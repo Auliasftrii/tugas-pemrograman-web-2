@@ -38,6 +38,10 @@
                 {{ $brand->jenis_brand }} --
                 {{ $brand->stok_brand }}
 
+                <a href="{{ route('brand.show', $brand) }}" class="btn btn-info btn-sm">
+                    Detail
+                </a>
+
                 <a href="{{ route('brand.edit', $brand) }}" class="btn btn-warning btn-sm">
                     Edit
                 </a>

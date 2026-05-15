@@ -72,9 +72,12 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Brand $brand)
     {
-        //
+        return view('brand.show', [
+            'title' => 'Detail Brand ' . $brand->nama_brand,
+            'brand' => $brand
+        ]);
     }
 
     /**
