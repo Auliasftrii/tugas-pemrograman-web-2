@@ -38,7 +38,18 @@
                 {{ $brand->jenis_brand }} --
                 {{ $brand->stok_brand }}
 
-                <a href="{{ route('brand.edit', $brand) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ route('brand.edit', $brand) }}" class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+
+                <form action="{{ route('brand.destroy', $brand) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin?')">
+                        Delete
+                    </button>
+                </form>
             </li>
         @endforeach
     </ul>
