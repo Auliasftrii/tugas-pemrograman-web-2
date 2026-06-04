@@ -10,4 +10,5 @@ Route::get('/', [ProdukController::class, 'index']);
 Route::resource('produk', ProdukController::class);
 Route::resource('kategori', KategoriController::class);
 Route::get('/brand/trash', [BrandController::class, 'trash'])->name('brand.trash');
+Route::put('/brand/{id}/restore', [BrandController::class, 'restore'])->name('brand.restore');
 Route::resource('brand', BrandController::class);

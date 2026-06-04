@@ -168,4 +168,14 @@ class BrandController extends Controller
             'brands' => Brand::onlyTrashed()->get(),
         ]);
     }
+
+    public function restore($id)
+    {
+        $brand = Brand::withTrashed()->findOrFail($id);
+
+        $brand->restore();
+
+        return redirect()->route('brand.trash')
+            ->withSuccess('Data brand berhasil dikembalikan');
+    }
 }
