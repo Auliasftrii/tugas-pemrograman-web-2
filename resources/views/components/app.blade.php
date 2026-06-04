@@ -23,6 +23,7 @@
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link" href="{{ route('produk.index') }}">Produk</a>
                     <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a>
+                    <a class="nav-link" href="{{ route('brand.trash') }}">Trash Brand</a>
                     <a class="nav-link" href="{{ route('brand.index') }}">Brand</a>
                 </div>
             </div>
