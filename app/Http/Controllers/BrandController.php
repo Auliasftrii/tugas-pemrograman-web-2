@@ -172,10 +172,16 @@ class BrandController extends Controller
     public function restore($id)
     {
         $brand = Brand::withTrashed()->findOrFail($id);
-
         $brand->restore();
-
         return redirect()->route('brand.trash')
             ->withSuccess('Data brand berhasil dikembalikan');
+    }
+
+    public function forceDelete($id)
+    {
+        $brand = Brand::withTrashed()->findOrFail($id);
+        $brand->forceDelete();
+        return redirect()->route('brand.trash')
+            ->withSuccess('Data brand berhasil dihapus secara permanen');
     }
 }

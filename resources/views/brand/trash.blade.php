@@ -23,15 +23,22 @@
                 {{ $brand->stok_brand }}
 
                 <form action="{{ route('brand.restore', $brand->id) }}" method="POST" class="d-inline">
-
                     @csrf
                     @method('PUT')
 
-                    <button type="submit" class="btn btn-warning btn-sm"
-                        onclick="return confirm('Yakin ingin mengembalikan data?')">
+                    <button type="submit" class="btn btn-warning btn-sm">
                         Restore
                     </button>
+                </form>
 
+                <form action="{{ route('brand.forceDelete', $brand->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Yakin ingin menghapus permanen?')">
+                        Force Delete
+                    </button>
                 </form>
 
             </li>

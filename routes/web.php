@@ -11,4 +11,5 @@ Route::resource('produk', ProdukController::class);
 Route::resource('kategori', KategoriController::class);
 Route::get('/brand/trash', [BrandController::class, 'trash'])->name('brand.trash');
 Route::put('/brand/{id}/restore', [BrandController::class, 'restore'])->name('brand.restore');
+Route::delete('/brand/{id}/force-delete', [BrandController::class, 'forceDelete'])->name('brand.forceDelete');
 Route::resource('brand', BrandController::class);
