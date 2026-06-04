@@ -118,6 +118,7 @@ class BrandController extends Controller
             'kode_brand' => 'required|unique:brands,kode_brand,' . $brand->id,
             'jenis_brand' => 'required|string|max:255',
             'stok_brand' => 'required|numeric',
+            'negara_asal' => 'required|max:255',
         ], [
             'kategori_id.required' => 'Pilih kategori terlebih dahulu',
             'nama_brand.required' => 'Nama brand tidak boleh kosong',
@@ -126,11 +127,28 @@ class BrandController extends Controller
             'kode_brand.unique' => 'Kode brand sudah ada',
             'jenis_brand.required' => 'Jenis brand wajib diisi',
             'stok_brand.required' => 'Stok brand wajib diisi',
+            'negara_asal.required' => 'Negara asal wajib diisi',
         ]);
 
-        $brand->update($validated);
+        try {
 
-        return redirect()->route('brand.index')->withSuccess('Data brand berhasil diubah');
+            DB::beginTransaction();
+
+            $brand->update($validated);
+
+            DB::commit();
+
+            return redirect()->route('brand.index')
+                ->withSuccess('Data brand berhasil diubah');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->route('brand.edit', $brand)
+                ->withError('Data brand gagal diubah');
+
+        }
     }
 
     /**
