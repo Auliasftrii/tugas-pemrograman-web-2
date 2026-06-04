@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {
@@ -53,6 +54,7 @@ class BrandController extends Controller
             'nama_brand' => 'required|min:3|max:255',
             'kode_brand' => 'required|unique:brands,kode_brand',
             'jenis_brand' => 'required|string|max:255',
+            'negara_asal' => 'required|max:255',
             'stok_brand' => 'required|numeric',
         ], [
             'kategori_id.required' => 'Pilih kategori terlebih dahulu',
@@ -64,9 +66,25 @@ class BrandController extends Controller
             'stok_brand.required' => 'Stok brand wajib diisi',
         ]);
 
-        Brand::create($validated);
+        try {
 
-        return redirect()->route('brand.index')->withSuccess('Data brand berhasil disimpan');
+            DB::beginTransaction();
+
+            Brand::create($validated);
+
+            DB::commit();
+
+            return redirect()->route('brand.index')
+                ->withSuccess('Data brand berhasil disimpan');
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return redirect()->route('brand.create')
+                ->withError('Data brand gagal disimpan');
+        }
+
     }
 
     /**

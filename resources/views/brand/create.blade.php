@@ -61,6 +61,19 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="negara_asal" class="form-label">Negara Asal</label>
+
+            <input type="text" name="negara_asal" id="negara_asal"
+                class="form-control @error('negara_asal') is-invalid @enderror" value="{{ old('negara_asal') }}">
+
+            @error('negara_asal')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
         <a href="{{ route('brand.index') }}" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
