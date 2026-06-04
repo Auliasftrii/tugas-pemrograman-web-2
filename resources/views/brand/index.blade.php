@@ -47,6 +47,7 @@
                 {{ $brand->kode_brand }} --
                 {{ $brand->kategori->nama_kategori }} --
                 {{ $brand->jenis_brand }} --
+                {{ $brand->negara_asal }} --
                 {{ $brand->stok_brand }}
 
                 <a href="{{ route('brand.show', $brand) }}" class="btn btn-info btn-sm">Detail</a>
