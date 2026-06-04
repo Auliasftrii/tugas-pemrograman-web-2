@@ -9,18 +9,17 @@ class KategoriController extends Controller
 {
     public function index(Request $request)
     {
-        $kategoris = Kategori::latest();
+    $kategoris = Kategori::latest();
 
-        $keyword = request('keyword');
-
-        if ($keyword) {
-            $kategoris->where('nama_kategori', 'like', '%' . $keyword . '%')
-                    ->orWhere('kode_kategori', 'like', '%' . $keyword . '%');
+        if ($request->keyword) {
+            $kategoris->where('nama_kategori', 'like', '%' . $request->keyword . '%')
+                ->orWhere('kode_kategori', 'like', '%' . $request->keyword . '%')
+                ->orWhere('deskripsi', 'like', '%' . $request->keyword . '%');
         }
 
         return view('kategori.index', [
             'title' => 'Kategori',
-            'kategoris' => $kategoris->paginate(2)->withQueryString(),
+            'kategoris' => $kategoris->paginate(3)->withQueryString()
         ]);
     }
 

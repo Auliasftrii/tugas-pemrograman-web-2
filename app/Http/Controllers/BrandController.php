@@ -122,7 +122,6 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-    return redirect()->route('brand.index')
-        ->withSuccess('Data brand berhasil dihapus');
+    return redirect()->route('brand.index')->withSuccess('Data brand berhasil dihapus');
     }
 }

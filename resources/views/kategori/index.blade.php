@@ -11,8 +11,14 @@
     <a class="btn btn-primary mb-3" href="{{ route('kategori.create') }}" role="button">Create</a>
 
     <form action="" class="mb-3">
-        <input type="text" name="keyword" class="form-control" placeholder="Cari kategori"
-            value="{{ request('keyword') }}">
+        <div class="row">
+            <div class="col-md-5">
+                <input type="text" name="keyword" class="form-control" placeholder="Cari kategori"
+                    value="{{ request('keyword') }}">
+            </div>
+
+            <div class="col-md-2"><button class="btn btn-success">Search</button></div>
+        </div>
     </form>
 
     <ul class="list-group">

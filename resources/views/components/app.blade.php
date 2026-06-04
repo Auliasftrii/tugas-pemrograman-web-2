@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-danger navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">UNITAMA</a>
+            <a class="navbar-brand" href="/">MAKE UP</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavAltMarkup">

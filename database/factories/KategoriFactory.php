@@ -10,10 +10,22 @@ class KategoriFactory extends Factory
     {
         return [
             'nama_kategori' => fake()->randomElement([
-                'Kosmetik', 'Skincare', 'Makanan', 'Minuman', 'Elektronik'
+                'Lipstik',
+                'Bedak',
+                'Skincare',
+                'Serum',
+                'Foundation'
             ]),
+
             'kode_kategori' => 'KTG' . fake()->unique()->numberBetween(100, 999),
-            'deskripsi' => fake()->sentence(),
+
+            'deskripsi' => fake()->randomElement([
+                'Produk kecantikan bibir',
+                'Produk perawatan wajah',
+                'Kosmetik wanita',
+                'Produk skincare',
+                'Makeup dan kecantikan'
+            ]),
         ];
     }
 }
